@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
-gem 'sqlite3'
+gem 'mongoid', github: 'mongoid/mongoid'
 
 gem 'haml'
 gem 'rabl'
