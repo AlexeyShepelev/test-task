@@ -1,0 +1,16 @@
+= hidden_field_tag 'current-date-template', current_date.strftime('%m/X/%Y')
+
+= calendar(year: current_date.year, month: current_date.month, abbrev: false,
+           month_header: false, table_id: 'nil', table_class: 'calendar-holder') do |d|
+  - event_count = 3
+
+  - capture_haml do
+    .day-holder
+      %span.day-num= d.mday
+      - if d.mday == 10 || d.mday == 9
+        %p.free-day No Events
+      - else
+        .random-progress{data: { value: 78 }}
+        .event-count
+          %p= event_count
+          = 'event'.pluralize(event_count)

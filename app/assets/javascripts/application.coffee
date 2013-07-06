@@ -5,16 +5,53 @@
 
 jQuery ->
   $(document).ready ->
-    initRandomProgresses()
+    initMonthPicker()
+    initSelectDateEffect()
     initCalendarCellSelection()
 
+  $(window).load ->
+    initRandomProgresses()
+
+
+  initMonthPicker = ->
+    $('#month-picker li').click ->
+      return false if $(this).hasClass('disabled')
+
+      newActive =
+        if $(this).hasClass('left')
+          $('.active').prev()
+        else if $(this).hasClass('right')
+          $('.active').next()
+        else
+          $(this)
+
+      $.get('/events.js', { year: newActive.data('year'), month: newActive.data('month') }, ->
+        $('#month-picker li').removeClass('active')
+        newActive.addClass('active')
+
+        if $('.active').prev().hasClass('left')
+          $('.left').addClass('disabled')
+        else
+          $('.left').removeClass('disabled')
+
+        if $('.active').next().hasClass('right')
+          $('.right').addClass('disabled')
+        else
+          $('.right').removeClass('disabled')
+      )
 
   initRandomProgresses = ->
     $('.random-progress').each ->
       $(this).radialProgress($(this).data('value'))
 
+  initSelectDateEffect = ->
+    $('#date-panel').click ->
+      if $('#calendar').is(':hidden')
+        $('#calendar').animate({opacity: 'toggle', 'margin-top': 'toggle'}, 300)
+      false
+
   initCalendarCellSelection = ->
-    $('#calendar-holder .day-holder').on('click', ->
+    $('.calendar-holder .day-holder').on('click', ->
       return false if $(this).hasClass('disabled')
 
       currentDay = parseInt($(this).find('.day-num').html())

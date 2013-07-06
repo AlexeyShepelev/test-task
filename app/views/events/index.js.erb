@@ -1,0 +1,12 @@
+oldCalendarPanel = $('.calendar-panel');
+
+newCalendarPanel = $("<div class='calendar-panel' style='display: none'></div>");
+newCalendarPanel.append("<%= escape_javascript(render 'calendar', current_date: @current_date) %>");
+$('#calendar').append(newCalendarPanel);
+
+newCalendarPanel.find('.random-progress').each(function(){
+  $(this).radialProgress($(this).data('value'));
+});
+
+oldCalendarPanel.remove();
+newCalendarPanel.show();

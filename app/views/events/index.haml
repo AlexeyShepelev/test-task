@@ -7,26 +7,13 @@
   #calendar
     %p.title SELECT MONTH
 
-    - current_date = Time.new
-
     %ul#month-picker
       %li.left
       - Date::ABBR_MONTHNAMES.compact.each_with_index do |abbrev, num|
-        %li{class: ('active' if num + 1 == current_date.month)}= abbrev
+        %li{class: ('active' if num + 1 == @current_date.month),
+            data: { year: @current_date.year, month: num + 1 }}= abbrev
       %li.right
 
-    = hidden_field_tag 'current-date-template', current_date.strftime('%m/X/%Y')
-    = calendar(year: current_date.year, month: current_date.month, abbrev: false,
-               month_header: false, table_id: 'calendar-holder', table_class: nil) do |d|
-      - event_count = 3
 
-      - capture_haml do
-        .day-holder
-          %span.day-num= d.mday
-          - if d.mday == 10 || d.mday == 9
-            %p.free-day No Events
-          - else
-            .random-progress{data: { value: 78 }}
-            .event-count
-              %p= event_count
-              = 'event'.pluralize(event_count)
+    .calendar-panel
+      = render 'calendar', current_date: @current_date
