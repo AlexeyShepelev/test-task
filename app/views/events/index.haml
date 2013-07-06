@@ -3,20 +3,28 @@
     %span Select Date
   #btn-search
     %span SEARCH
+
   #calendar
     %p.title SELECT MONTH
+
+    - current_date = Time.new
+
     %ul#month-picker
       %li.left
-      %li JAN
-      %li FEB
-      %li MAR
-      %li APR
-      %li MAY
-      %li.active JUN
-      %li JUL
-      %li AUG
-      %li SEP
-      %li OCT
-      %li NOV
-      %li DEC
+      - Date::ABBR_MONTHNAMES.compact.each_with_index do |abbrev, num|
+        %li{class: ('active' if num + 1 == current_date.month)}= abbrev
       %li.right
+
+    = calendar(year: current_date.year, month: current_date.month, abbrev: false, month_header: false) do |d|
+      - event_count = 3
+
+      - capture_haml do
+        %div
+          %span.day-num= d.mday
+          - if d.mday == 10 || d.mday == 9
+            %p.free-day No Events
+          - else
+            .random-progress{data: { value: 78 }}
+            .event-count
+              %p= event_count
+              = 'event'.pluralize(event_count)

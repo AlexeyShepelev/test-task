@@ -26,7 +26,7 @@ body {
   font-weight: normal;
   font-style: normal;
   text-decoration: none;
-  font-family:Arial;
+  font-family: Arial;
   background: #3972B0;
   cursor: default;
 }
@@ -78,9 +78,13 @@ body {
     }
   }
 
+  #btn-search:hover {
+    opacity: 0.9;
+  }
+
   #calendar {
     width: 670px;
-    height: 535px;
+    height: 545px;
     margin: 52px 0 20px 0;
     text-align: center;
 
@@ -107,33 +111,35 @@ body {
 
     #month-picker {
       list-style: none;
-      margin-top: 10px;
+      margin-top: -3px;
+      padding: 0;
 
       li {
         display: inline-block;
-        font-size: 12px;
+        font-size: 11px;
         color: #fff;
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.32);
-        padding: 6px 6px 1px 4px;
+        padding: 4px 4px 1px 4px;
         width: 25px;
         height: 15px;
+        text-transform: uppercase;
+        cursor: pointer;
       }
 
       li:hover {
-        cursor: pointer;
         opacity: 0.7;
       }
 
       li.left {
         position: relative;
-        top: 9px;
+        top: 8px;
         padding-right: 0;
         background: url("month_picker.png") no-repeat 12px 0;
       }
 
       li.right {
         position: relative;
-        top: 9px;
+        top: 8px;
         padding-left: 0;
         background: url("month_picker.png") no-repeat -16px 0;
       }
@@ -151,6 +157,143 @@ body {
         cursor: default;
       }
     }
+
+    .calendar {
+      margin: 30px 33px 0 33px;
+      font-family: "HelveticaNeueBold", Arial;
+
+      th {
+        width: 80px;
+        font-size: 11px;
+        color: #fff;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+        padding-bottom: 5px;
+        text-transform: uppercase;
+
+        span {
+          position: relative;
+          left: -2px;
+        }
+      }
+
+      td {
+        width: 86px;
+        height: 81px;
+        background: url("day_cell.png") no-repeat;
+        background-position: center;
+
+        div {
+          width: 82px;
+          height: 76px;
+          margin-left: 2px;
+          cursor: pointer;
+
+          .day-num {
+            font-size: 14px;
+            color: #fff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.35);
+            float: right;
+            margin: 1px 62px 0 0;
+            width: 82px;
+            text-align: right;
+          }
+
+          noindex:-o-prefocus, .day-num {
+            margin-top: 5px;
+          }
+
+          .event-count {
+            font-size: 10px;
+            font-family: "HelveticaNeueMedium", Arial;
+            color: #666;
+            height: 35px;
+            width: 35px;
+            margin: 8px 7px 0 0;
+            float: right;
+
+            p {
+              font-size: 14px;
+              font-family: "HelveticaNeueBold", Arial;
+              padding: 0;
+              margin: 0;
+              position: relative;
+              top: 4px;
+            }
+          }
+
+          noindex:-o-prefocus, .event-count {
+            margin-top: 13px;
+          }
+
+          .random-progress {
+            float: left;
+            width: 32px;
+            height: 32px;
+            position: relative;
+            top: 12px;
+            left: 5px;
+            background: url("progress-background.png") no-repeat;
+            margin: 0;
+
+            box-shadow: 0 0 1px 0px rgba(0,0,0,0.7);
+            -moz-box-shadow: 0 0 1px 0px rgba(0,0,0,0.7);
+            -webkit-box-shadow: 0 0 1px 0px rgba(0,0,0,0.7);
+
+            -moz-border-radius: 32px;
+            -webkit-border-radius: 32px;
+            border-radius: 32px;
+
+            .progress-scale,
+            .progress-cap,
+            .progress-shadow,
+            .progress-value-text {
+              width: 100%;
+              height: 100%;
+              margin-left: 0.5px;
+              position: absolute;
+            }
+          }
+        }
+
+        p.free-day {
+          font-size: 9px;
+          font-family: "HelveticaNeueMedium", Arial;
+          color: #666;
+          position: absolute;
+          margin: 40px 0 0 17px;
+        }
+      }
+
+      td.otherMonth {
+        visibility: hidden;
+      }
+    }
   }
 }
 
+@-moz-document url-prefix() {
+  #main-container #calendar .calendar td div {
+    .random-progress {
+      box-shadow: none;
+      -moz-box-shadow: none;
+      -webkit-box-shadow: none;
+    }
+
+    .event-count {
+      margin-top: 10px;
+
+      p {
+        padding-bottom: 4px;
+      }
+    }
+  }
+  #main-container #calendar .calendar td div .random-progress {
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+  }
+
+  #main-container #calendar .calendar td div .event-count p {
+    padding-bottom: 4px;
+  }
+}

@@ -1,0 +1,58 @@
+jQuery ->
+  $.fn.radialProgress = (value) ->
+    scale = $("<div class='progress-scale'></div>")
+    cap = $("<div class='progress-cap'></div>")
+    shadow = $("<div class='progress-shadow'></div>")
+    text = $("<div class='progress-value-text'></div>")
+
+    $(this).append(scale)
+    $(this).append(cap)
+    $(this).append(shadow)
+    $(this).append(text)
+
+    # Draw scale
+    paper = Raphael(scale.get(0), 32, 32)
+
+    switch
+      when value < 28
+        colorStart = '#ff0000'
+        colorEnd = '#ff3300'
+      when value < 48
+        colorStart = '#cc0000'
+        colorEnd = '#ffcc33'
+      when value < 57
+        colorStart = '#cc6600'
+        colorEnd = '#ffcc33'
+      when value < 79
+        colorStart = '#006fd1'
+        colorEnd = '#00ffff'
+      when value < 88
+        colorStart = '#0033cc'
+        colorEnd = '#00ffff'
+      else
+        colorStart = '#006600'
+        colorEnd = '#ccff33'
+
+    rad = Math.PI / 180
+    startAngle = 270 - value * 360 / 100
+    endAngle = 270
+
+    x1 = 16 + 16 * Math.cos(-startAngle * rad)
+    x2 = 16 + 16 * Math.cos(-endAngle * rad)
+    y1 = 16 + 16 * Math.sin(-startAngle * rad)
+    y2 = 16 + 16 * Math.sin(-endAngle * rad)
+
+    p = paper.path(['M', 16, 16, 'L', x1, y1, 'A', 16, 16, 0, +(endAngle - startAngle > 180), 0, x2, y2, 'z'])
+             .attr(fill: "49-#{colorStart}-#{colorEnd}", stroke: 'none')
+    paper.set().push(p)
+
+    # Draw cap
+    Raphael(cap.get(0), 32, 32).image("<%= asset_path('progress-cap.png') %>", 0, 0, 32, 32)
+
+    # Draw shadow
+    Raphael(shadow.get(0), 32, 32).circle(16, 16, 13).attr(fill: 'none', stroke: 'none')
+        .glow(width: 1, fill: false, opacity: 0.2, offsetx: 0, offsety: 0, color: '#808080')
+
+    # Draw value text
+    Raphael(text.get(0), 32, 32).text(16, 15, "#{value}%")
+        .attr('font-size': 9, 'font-family': 'HelveticaNeueBold', translation: '4,4', fill: '#999')
