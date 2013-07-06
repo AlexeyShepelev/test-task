@@ -158,7 +158,7 @@ body {
       }
     }
 
-    .calendar {
+    #calendar-holder {
       margin: 30px 33px 0 33px;
       font-family: "HelveticaNeueBold", Arial;
 
@@ -182,7 +182,7 @@ body {
         background: url("day_cell.png") no-repeat;
         background-position: center;
 
-        div {
+        .day-holder {
           width: 82px;
           height: 76px;
           margin-left: 2px;
@@ -232,7 +232,7 @@ body {
             position: relative;
             top: 12px;
             left: 5px;
-            background: url("progress-background.png") no-repeat;
+            background: url("progress_background.png") no-repeat;
             margin: 0;
 
             box-shadow: 0 0 1px 0px rgba(0,0,0,0.7);
@@ -253,26 +253,47 @@ body {
               position: absolute;
             }
           }
+
+          p.free-day {
+            font-size: 9px;
+            font-family: "HelveticaNeueMedium", Arial;
+            color: #666;
+            position: absolute;
+            margin: 40px 0 0 17px;
+          }
         }
 
-        p.free-day {
-          font-size: 9px;
-          font-family: "HelveticaNeueMedium", Arial;
-          color: #666;
-          position: absolute;
-          margin: 40px 0 0 17px;
+        .day-holder.disabled {
+          cursor: default;
         }
       }
 
       td.otherMonth {
         visibility: hidden;
       }
+
+      td.start-day,
+      td.end-day {
+        .day-holder .random-progress,
+        .day-holder .event-count,
+        .day-holder .free-day {
+          display: none;
+        }
+      }
+
+      td.start-day {
+        background: url("day_selectors.png") no-repeat 2px 2px;
+      }
+
+      td.end-day {
+        background: url("day_selectors.png") no-repeat -84px 2px;
+      }
     }
   }
 }
 
 @-moz-document url-prefix() {
-  #main-container #calendar .calendar td div {
+  #main-container #calendar #calendar-holder td div {
     .random-progress {
       box-shadow: none;
       -moz-box-shadow: none;
@@ -287,13 +308,13 @@ body {
       }
     }
   }
-  #main-container #calendar .calendar td div .random-progress {
+  #main-container #calendar #calendar-holder td div .random-progress {
     box-shadow: none;
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
   }
 
-  #main-container #calendar .calendar td div .event-count p {
+  #main-container #calendar #calendar-holder td div .event-count p {
     padding-bottom: 4px;
   }
 }

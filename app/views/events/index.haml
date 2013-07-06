@@ -15,11 +15,13 @@
         %li{class: ('active' if num + 1 == current_date.month)}= abbrev
       %li.right
 
-    = calendar(year: current_date.year, month: current_date.month, abbrev: false, month_header: false) do |d|
+    = hidden_field_tag 'current-date-template', current_date.strftime('%m/X/%Y')
+    = calendar(year: current_date.year, month: current_date.month, abbrev: false,
+               month_header: false, table_id: 'calendar-holder', table_class: nil) do |d|
       - event_count = 3
 
       - capture_haml do
-        %div
+        .day-holder
           %span.day-num= d.mday
           - if d.mday == 10 || d.mday == 9
             %p.free-day No Events

@@ -47,7 +47,7 @@ jQuery ->
     paper.set().push(p)
 
     # Draw cap
-    Raphael(cap.get(0), 32, 32).image("<%= asset_path('progress-cap.png') %>", 0, 0, 32, 32)
+    Raphael(cap.get(0), 32, 32).image("<%= asset_path('progress_cap.png') %>", 0, 0, 32, 32)
 
     # Draw shadow
     Raphael(shadow.get(0), 32, 32).circle(16, 16, 13).attr(fill: 'none', stroke: 'none')
