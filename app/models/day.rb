@@ -1,7 +1,7 @@
 class Day
   include Mongoid::Document
 
-  field :date,         type: Date
+  field :date,         type: Numeric
   field :event_count,  type: Numeric, default: 0
   field :random_value, type: Numeric
 
