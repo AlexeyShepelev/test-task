@@ -58,7 +58,7 @@ jQuery ->
       for day in data
         holder = $(".day-holder[data-day = #{day.date}]")
 
-        newHolder = $("<div class='day-holder' data-day='#{day.date}' style='display: none'></div>")
+        newHolder = $("<div class='#{holder.attr('class')}' data-day='#{day.date}' style='display: none'></div>")
         newHolder.append(holder.find('span').clone())
 
         if day.event_count > 0
@@ -80,16 +80,18 @@ jQuery ->
     $(document).on('click', '.calendar-holder .day-holder', ->
       return false if $(this).hasClass('disabled')
 
-      currentDay = parseInt($(this).find('.day-num').html())
-      currentDate = $('#current-date-template').val().replace('X', "0#{currentDay}".substr(-2, 2))
+      currentDateString =
+          $('#current-date-template').val().replace('X', "0#{$(this).find('.day-num').html()}".substr(-2, 2))
 
-      if $('.start-day').length
+      if $('#current-start-date').val().length
         $(this).closest('.day').addClass('end-day')
         $('.day-holder').addClass('disabled')
-        $('#date-panel span').append(currentDate)
+        $('#date-panel span').append(currentDateString)
+        $('#current-end-date').val($(this).data('day'))
       else
+        startDate = $(this).data('day')
         $(this).closest('.day').addClass('start-day')
-        $('.day-holder').filter( ->
-          currentDay >= parseInt($(this).find('.day-num').html())).addClass('disabled')
-        $('#date-panel span').html("#{currentDate} - ")
+        $('.day-holder').filter( -> startDate >= $(this).data('day')).addClass('disabled')
+        $('#date-panel span').html("#{currentDateString} - ")
+        $('#current-start-date').val(startDate)
     )

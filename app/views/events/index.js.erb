@@ -10,3 +10,20 @@ newCalendarPanel.find('.random-progress').each(function(){
 
 oldCalendarPanel.remove();
 newCalendarPanel.show();
+
+// Restrictions for calendar cells
+$('.day-holder').each(function(){
+  startDate =  $('#current-start-date').val();
+  endDate = $('#current-end-date').val();
+
+  if(endDate.length > 0 || (startDate.length > 0 && parseInt(startDate) >= $(this).data('day'))) {
+    $(this).addClass('disabled')
+  }
+
+  if(parseInt(startDate) == $(this).data('day')) {
+    $(this).closest('.day').addClass('start-day');
+
+  } else if(parseInt(endDate) == $(this).data('day')) {
+    $(this).closest('.day').addClass('end-day');
+  }
+});

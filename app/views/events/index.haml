@@ -14,6 +14,8 @@
             data: { year: @current_date.year, month: num + 1 }}= abbrev
       %li.right
 
+    = hidden_field_tag 'current-start-date'
+    = hidden_field_tag 'current-end-date'
 
     .calendar-panel
       = render 'calendar', current_date: @current_date, current_days: @days
