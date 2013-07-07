@@ -1,7 +1,7 @@
 oldCalendarPanel = $('.calendar-panel');
 
 newCalendarPanel = $("<div class='calendar-panel' style='display: none'></div>");
-newCalendarPanel.append("<%= escape_javascript(render 'calendar', current_date: @current_date) %>");
+newCalendarPanel.append("<%= escape_javascript(render 'calendar', current_date: @current_date, current_days: @days) %>");
 $('#calendar').append(newCalendarPanel);
 
 newCalendarPanel.find('.random-progress').each(function(){

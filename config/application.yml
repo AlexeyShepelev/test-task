@@ -1,0 +1,12 @@
+defaults: &defaults
+  event_collector:
+    timeout: 1
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

@@ -15,3 +15,5 @@ gem 'therubyracer', platforms: :ruby
 gem 'calendar_helper'
 
 gem 'savon'
+
+gem 'settingslogic'

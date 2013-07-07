@@ -2,15 +2,16 @@
 
 = calendar(year: current_date.year, month: current_date.month, abbrev: false,
            month_header: false, table_id: 'nil', table_class: 'calendar-holder') do |d|
-  - event_count = 3
+
+  - current_day = current_days.select{ |day| day.date == d }.first
 
   - capture_haml do
-    .day-holder
+    .day-holder{data: { day: current_date.change(day: d.mday).beginning_of_day.to_i }}
       %span.day-num= d.mday
-      - if d.mday == 10 || d.mday == 9
+      - if current_day.nil? || current_day.event_count.zero?
         %p.free-day No Events
       - else
-        .random-progress{data: { value: 78 }}
+        .random-progress{data: { value: current_day.random_value }}
         .event-count
-          %p= event_count
-          = 'event'.pluralize(event_count)
+          %p= current_day.event_count
+          = 'event'.pluralize(current_day.event_count)

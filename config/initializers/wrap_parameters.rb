@@ -12,3 +12,10 @@ end
 # ActiveSupport.on_load(:active_record) do
 #  self.include_root_in_json = true
 # end
+
+# Disable root element in JSON for rabl.
+Rabl.configure do |config|
+  config.include_json_root = false
+  config.include_child_root = false
+  config.xml_options = { skip_types: true }
+end
