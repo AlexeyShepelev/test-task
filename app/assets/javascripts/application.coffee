@@ -5,6 +5,7 @@
 
 jQuery ->
   $(document).ready ->
+    initSearchBtn()
     initMonthPicker()
     initSelectDateEffect()
     initCalendarCellSelection()
@@ -13,6 +14,13 @@ jQuery ->
     initRandomProgresses()
     initUpdateDataRequest()
 
+
+  initSearchBtn = ->
+    $('#btn-search').click ->
+      return false unless $('#current-end-date').val().length
+
+      $('#calendar').animate({opacity: 'toggle', 'margin-top': 'toggle'}, 300)
+      $.get('/events/show_by_range.js', { date_start: $('#current-start-date').val(), date_end: $('#current-end-date').val() })
 
   initMonthPicker = ->
     $('#month-picker li').click ->

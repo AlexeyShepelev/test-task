@@ -2,6 +2,7 @@ TestTask::Application.routes.draw do
   resources :events, only: [:index] do
     collection do
       get 'updated_data'
+      get 'show_by_range'
     end
   end
 

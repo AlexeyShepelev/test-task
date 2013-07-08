@@ -18,7 +18,7 @@ begin
       end
     end
 
-    { api_id: row[:event_id], title: row[:title], description: row[:description],
+    { api_id: row[:event_id], title: row[:title], description: row[:short_desc],
       date_start: row[:date_start], date_end: row[:date_end], updated_at: row[:update_date] }
   end
 

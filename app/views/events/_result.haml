@@ -1,0 +1,14 @@
+#result
+  - events.each do |event|
+    %div
+      %p= "Event Name: #{event.title}"
+      %p
+        %span= "Start Date: #{event.date_start.strftime('%Y-%m-%d')}"
+        %span= "End Date: #{event.date_end.strftime('%Y-%m-%d')}"
+        %span= "Start Time: #{event.date_start.strftime('%H:%M%P')}"
+        %span= "End Time: #{event.date_end.strftime('%H:%M%P')}"
+      %p
+        Description:
+        = raw event.description
+
+  = paginate events, outer_window: 3, remote: true
