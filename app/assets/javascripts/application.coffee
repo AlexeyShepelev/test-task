@@ -57,7 +57,7 @@ jQuery ->
 
   initSelectDateEffect = ->
     $('#date-panel').click ->
-      if $('#calendar').is(':hidden')
+      if $('#calendar').is(':hidden') && $('#result').length == 0
         $('#calendar').animate({opacity: 'toggle', 'margin-top': 'toggle'}, 300)
       false
 

@@ -18,3 +18,5 @@ gem 'calendar_helper'
 gem 'savon'
 
 gem 'settingslogic'
+
+gem 'puma'
